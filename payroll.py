@@ -1,5 +1,6 @@
 from constants import INCOME_TAX_RATE, MILITARY_TAX_RATE, BONUS_RATE, MONTHS_IN_YEAR
 from job_details import JobDetails
+import datetime
 
 class Payroll:
     def __init__(self, name, age, salary, is_happy):
@@ -37,8 +38,9 @@ class Payroll:
     def get_employees(cls):
         return []
 
-    def age_increment(self):
-        self.age += 1
+    @property
+    def birth_year(self):
+        return datetime.datetime.now().year - self.age
 
     def display_summary(self):
         print(f"Employee: {self.name}, Age: {self.age}, Salary: {self.salary}")
@@ -52,7 +54,7 @@ class Developer(Payroll, JobDetails):
         self.language = language
 
     def get_data(self):
-        return (f"Name: {self.name}, Age: {self.age}, Salary: {self.salary}, "
+        return (f"Name: {self.name}, Year of Birth: {self.birth_year}, Age: {self.age}, Salary: {self.salary}, "
                 f"Mood: {self.is_happy}, Language: {self.language}, "
                 f"Position: {self.position}, Company: {self.company}")
 
@@ -68,7 +70,7 @@ class Manager(Payroll, JobDetails):
         self.department = department
 
     def get_data(self):
-        return (f"Name: {self.name}, Age: {self.age}, Salary: {self.salary}, "
+        return (f"Name: {self.name}, Year of Birth: {self.birth_year},Age: {self.age}, Salary: {self.salary}, "
                 f"Mood: {self.is_happy}, Department: {self.department}, "
                 f"Position: {self.position}, Company: {self.company}")
 
